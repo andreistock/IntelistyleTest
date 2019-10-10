@@ -3,6 +3,7 @@
 const fs = require('fs');
 var pg = require('pg');
 
+//Configuration for accessing the database. Normally, we would want this in a different file with different access permissions
 var config = {
     user: 'deployer', // env var: PGUSER
     database: 'garmentdata', // env var: PGDATABASE
@@ -13,18 +14,11 @@ var config = {
     idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
 }
 
-// var allLines = fs.readFileSync('./garment_items.jl').toString().split('\n');
-// fs.writeFileSync('./outputfile.json', '', function(){console.log('file is empty')})
-// allLines.forEach(function (line) {
-//     var newLine = line + ",";
-//     console.log(newLine);
-//     fs.appendFileSync("./outputfile.json", newLine.toString() + "\n");
-// });
-//
+
 
 const pool = new pg.Pool(config)
 
-//
+// Create the table into the database
 let queryA = 'CREATE TABLE IF NOT EXISTS items (product_categories_mapped TEXT [],  product_id TEXT,  url TEXT,  gender TEXT, brand TEXT,  product_description TEXT, image_urls TEXT [], source TEXT, product_categories TEXT [], images TEXT [], price TEXT, product_title TEXT);';
 
 pool.query(queryA, (err, res) => {
@@ -45,12 +39,9 @@ function insertDataToTable (e){
   pool.query(queryA,values,(err,res) => {
     if (err) {
     console.log(err.stack)
-    } else {
-    // console.log(res.rows[0])
-  }})
+  } })
 }
 
-const wait = time => new Promise((resolve) => setTimeout(resolve, time));
 
 const processData = data => new Promise((resolve) => {
   for (var i = 0; i < data.length; i++){
