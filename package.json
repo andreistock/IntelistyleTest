@@ -1,0 +1,22 @@
+{
+  "name": "intelistyletest",
+  "version": "1.0.0",
+  "description": "search page",
+  "main": "processData.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreistock/IntelistyleTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreistock/IntelistyleTest/issues"
+  },
+  "homepage": "https://github.com/andreistock/IntelistyleTest#readme",
+  "dependencies": {
+    "pg": "^7.12.1"
+  }
+}
