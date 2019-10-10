@@ -14,13 +14,13 @@ app.use(cors())
 const getOutfit = (request, response) => {
   console.log(request.body.data);
   var data = request.body.data.split(" ");
-  //Constructing the specific query for the database. It uses LIKE for a similar match. Futher improvement can deal with issues such as capitalisation.
+
+  //Constructing the specific query for the database. It uses LIKE for a similar match. LOWER for case sensitive
   let query = "SELECT * FROM items WHERE "
   for (var i=0; i<data.length-1; i++){
-    query += `product_title LIKE '%${data[i]}%' AND `
+    query += `LOWER(product_title) LIKE LOWER('%${data[i]}%') AND ` // Dealing with multiple keywords
   }
-  query += `product_title LIKE '%${data[data.length - 1]}%'`
-
+  query += `LOWER(product_title) LIKE LOWER('%${data[data.length - 1]}%')`
 
   pool.query(query, (error, results) => {
     if (error) {
@@ -29,7 +29,6 @@ const getOutfit = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
-
 
 app
   .route('/')
