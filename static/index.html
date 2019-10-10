@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <h1>Welcome to Intelistyle garment search</h1>
+  <form class="form" action="javascript:;" onsubmit="getData(this)">
+    <input id="input1" value="Submit" type="text">
+    <button type=submit>ClickME!!</button>
+  </form>
+
+  <div>
+          <table id="garmentData">
+              <thead>
+                  <th onclick="sortTable(0)"><span class="glyphicon glyphicon-sort"></span>&nbsp&nbspBrand</th>
+                  <th onclick="sortTable(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp&nbspTitle</th>
+                  <th onclick="sortTable(2)"><span class="glyphicon glyphicon-sort"></span>&nbsp&nbspPrice</th>
+                  <th onclick="sortTable(3)"><span class="glyphicon glyphicon-sort"></span>&nbsp&nbspProduct Id</th>
+              </<thead>
+
+              <tbody id="tableBody">
+              </tbody>
+
+          </table>
+      </div>
+      <script>
+          function getData(){
+            // Relative URL of external json file
+            var req_url = 'http://34.253.202.24:3002';
+            var req_body = { "data":`${document.getElementById("input1").value}` }
+
+            //Build the XMLHttpRequest (aka AJAX Request)
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {//when a good response is given do this
+                    console.log(this.reponseText);
+                    var data = JSON.parse(this.responseText); // convert the response to a json object
+                    append_data(data);// pass the json object to the append_data function
+                }
+            }
+            //set the request destination and type
+            xmlhttp.open("POST", req_url, true);
+            //set required headers for the request
+            xmlhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+            xmlhttp.setRequestHeader("Access-Control-Allow-Headers", "*");
+
+
+            // send the request
+            xmlhttp.send(JSON.stringify(req_body)); // when the request completes it will execute the code in onreadystatechange section
+          }
+
+          function append_data(data){
+            var node = document.getElementById("tableBody");
+            while (node.hasChildNodes()) {
+              node.removeChild(node.lastChild); // clear table for further searches
+            }
+            console.log(data)
+            var table = document.getElementById('tableBody'); //append rows that result from the search
+            data.forEach(function(object) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td class = "brand">' + object.brand + '</td>' +
+                '<td class = "title">' + object.product_title + '</td>' +
+                '<td>' + object.price + "£" + '</td>' +
+                '<td>' + object.product_id + '</td>';
+                table.appendChild(tr);
+            });
+          }
+      </script>
+
+
+</body>
+
+
+</html>

@@ -1,3 +1,5 @@
+//This file sets up the configurations of the database and the connection
+
 var pg = require('pg');
 
 var config = {

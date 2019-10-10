@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+#garmentData {
+  margin: auto;
+  width: 50%;
+  border: 1px solid blue;
+  padding: 10px;
+}
+
+body {
+}
+h1 {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+p {
+  color: red;
+}
+.search {
+  margin: auto;
+  width: 50%;
+  border: 1px solid blue;
+  padding: 10px;
+}
+.form {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  border: 1px solid blue;
+  padding: 10px;
+}
+.brand {
+  text-align:center;
+}
+.title {
+  text-align: center;
+}
