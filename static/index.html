@@ -37,7 +37,7 @@
           if (this.readyState == 4 && this.status == 200) {//when a good response is given do this
               console.log(this.reponseText);
               var data = JSON.parse(this.responseText); // convert the response to a json object
-              append_data(data);// pass the json object to the append_data function
+              appendData(data);// pass the json object to the append_data function
           }
       }
       //set the request destination and type
@@ -51,13 +51,13 @@
       xmlhttp.send(JSON.stringify(req_body)); // when the request completes it will execute the code in onreadystatechange section
     }
 
-    function append_data(data){
-      var node = document.getElementById("tableBody");
+    function appendData(data){
+      var node = document.getElementById("tableBody"); //select rows
       while (node.hasChildNodes()) {
         node.removeChild(node.lastChild); // clear table for further searches
       }
       console.log(data)
-      var table = document.getElementById('tableBody'); //append rows that result from the search
+      var table = document.getElementById('tableBody'); //construct and append rows that result from the search
       data.forEach(function(object) {
           var tr = document.createElement('tr');
           tr.innerHTML = '<td class = "brand">' + object.brand + '</td>' +

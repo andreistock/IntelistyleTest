@@ -8,8 +8,6 @@
   padding: 10px;
 }
 
-body {
-}
 h1 {
   text-align: center;
   margin: auto;
@@ -17,9 +15,7 @@ h1 {
   border: 3px solid green;
   padding: 10px;
 }
-p {
-  color: red;
-}
+
 .search {
   margin: auto;
   width: 50%;
